@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  useBaseURL,
   useLoginStore,
   useNavMiddleStore,
   useOpenModalStore,
@@ -19,8 +20,10 @@ function Reservation() {
   const [showDetail, setShowDetails] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
-    fetch(`/book/reservation`)
+    fetch(`${baseURL}/book/reservation`)
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {

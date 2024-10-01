@@ -5,6 +5,7 @@ import Validity from "../Validity";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import { toast, ToastContainer } from "react-toastify";
+import { useBaseURL } from "../../../store/credentialStore";
 
 function ResetPassword() {
   const passwordRef = useRef(null);
@@ -28,9 +29,11 @@ function ResetPassword() {
     console.log("toggle password");
   }
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   const onSubmit = async (data) => {
     setIsSpinning(true);
-    await fetch(`/user/change_password`, {
+    await fetch(`${baseURL}/user/change_password`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Link, useParams } from "react-router-dom";
 import {
+  useBaseURL,
   usePrice,
   usePriority,
   useReload,
@@ -80,11 +81,13 @@ function SearchHotelCard({ className }) {
   const reload = useReload((state) => state.reload);
   const priority = usePriority((state) => state.priority);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
     // price[lte]=5000
     setMoreLoading(true);
     fetch(
-      `/hotel?limit=18&skip=${skip}&searchText=${params.searchText}&price[lte]=${priceRange[1]}&price[gte]=${priceRange[0]}&sort=${priority}`
+      `${baseURL}/hotel?limit=18&skip=${skip}&searchText=${params.searchText}&price[lte]=${priceRange[1]}&price[gte]=${priceRange[0]}&sort=${priority}`
     )
       .then((res) => res.json())
       .then((data) => {

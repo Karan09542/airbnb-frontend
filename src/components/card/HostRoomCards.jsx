@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SyncLoader from "react-spinners/SyncLoader";
 import {
+  useBaseURL,
   useHostDataStore,
   useRefereshRoomStore,
 } from "../../../store/credentialStore";
@@ -14,8 +15,10 @@ function HostRoomCards({ setValue }) {
   const reloadRooms = useRefereshRoomStore((state) => state.reloadRooms);
   const setReloadRooms = useRefereshRoomStore((state) => state.setReloadRooms);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
-    fetch(`/hotel/host/rooms`)
+    fetch(`${baseURL}/hotel/host/rooms`)
       .then((res) => res.json())
       .then((data) => {
         setRooms(data.rooms);
@@ -24,7 +27,7 @@ function HostRoomCards({ setValue }) {
   }, [reloadRooms]);
 
   const handleDeleteRoom = async (room) => {
-    await fetch(`/hotel/host/room/delete`, {
+    await fetch(`${baseURL}/hotel/host/room/delete`, {
       method: "POST",
       headers: { "Content-type": "application/json; charset=UTF-8" },
       body: JSON.stringify({ roomId: room._id }),

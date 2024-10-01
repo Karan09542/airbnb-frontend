@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AuthenticateModel from "../modals/AuthenticateModel";
 import NavBar from "../Navbar";
-import { useNavMiddleStore } from "../../../store/credentialStore";
+import { useBaseURL, useNavMiddleStore } from "../../../store/credentialStore";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -12,8 +12,10 @@ function ManageReservation() {
 
   const setIsNavMiddle = useNavMiddleStore((state) => state.setIsNavMiddle);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   function handleReservationStatus(bookingId, reservationStatus) {
-    fetch(`/book/updateReservationStatus`, {
+    fetch(`${baseURL}/book/updateReservationStatus`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +42,9 @@ function ManageReservation() {
     setIsNavMiddle(false);
   }, []);
   useEffect(() => {
-    fetch(`/book/BookingUserDetails?status=${selectStatus || "pending"}`)
+    fetch(
+      `${baseURL}/book/BookingUserDetails?status=${selectStatus || "pending"}`
+    )
       .then((res) => res.json())
       .then((data) => setBookings(data.bookings))
       .finally(() => {

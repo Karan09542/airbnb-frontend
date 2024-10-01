@@ -6,6 +6,7 @@ import Browse from "../../assets/browse.svg?react";
 import Tweeter from "../../assets/tweeter.svg?react";
 import { AiFillFacebook } from "react-icons/ai";
 import { FaSquareInstagram } from "react-icons/fa6";
+import { useBaseURL } from "../../../store/credentialStore";
 
 function Footer() {
   const footerInspirationTitle = [
@@ -21,8 +22,10 @@ function Footer() {
   const [highlightTo, setHighlightTo] = useState(null);
   const [whatInspiration, setWhatInspiration] = useState({});
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
-    fetch(`/content/inspiration.json`)
+    fetch(`${baseURL}/content/inspiration.json`)
       .then((res) => res.json())
       .then((inspir) => setWhatInspiration(inspir));
   }, []);

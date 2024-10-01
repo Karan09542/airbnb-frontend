@@ -3,14 +3,15 @@ import NavAirbnbSetup from "./NavAirbnbSetup";
 import AuthenticateModel from "../modals/AuthenticateModel";
 import Dashboard from "./Dashboard";
 import BarLoader from "react-spinners/BarLoader";
-import { useLoginStore } from "../../../store/credentialStore";
+import { useBaseURL, useLoginStore } from "../../../store/credentialStore";
 
 function AirbnbYHome() {
+  const baseURL = useBaseURL((state) => state.baseURL);
   const [showDashboard, setShowDashboard] = useState(false);
   const [loading, setLoading] = useState(true);
   const isLogin = useLoginStore((state) => state.isLogin);
   useEffect(() => {
-    fetch(`/hotel/dashboard`)
+    fetch(`${baseURL}/hotel/dashboard`)
       .then((res) => {
         if (res.ok) {
           setShowDashboard(true);

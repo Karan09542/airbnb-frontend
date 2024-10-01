@@ -10,6 +10,7 @@ import useOutsideClose from "../../hooks/useOutsideClose";
 import Validity from "../Validity";
 import { toast } from "react-toastify";
 import {
+  useBaseURL,
   useFormDataStore,
   useLoginStore,
   useOpenModalStore,
@@ -45,6 +46,7 @@ function Sign_toEmail() {
   const [errors, setErrors] = useState({});
   const setIsLogin = useLoginStore((state) => state.setIsLogin);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
   const setOtp = useOTP((state) => state.setOtp);
 
   async function verifyAndContinue(AgreeAndContinueFlag = false) {
@@ -67,7 +69,7 @@ function Sign_toEmail() {
     if (AgreeAndContinueFlag && Object.keys(tempErrors).length === 0) {
       // Proceed with further processing, such as form submission
       console.log("Form is valid, proceeding...");
-      await fetch(`/user/signup`, {
+      await fetch(`${baseURL}/user/signup`, {
         method: "POST",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

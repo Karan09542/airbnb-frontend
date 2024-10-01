@@ -3,13 +3,15 @@ import { FaAirbnb } from "react-icons/fa";
 import HomeSetupSVG from "../../assets/homeSetup.svg?react";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import { useOpenModalStore } from "../../../store/credentialStore";
+import { useBaseURL, useOpenModalStore } from "../../../store/credentialStore";
 import { toast } from "react-toastify";
 import useOutsideClose from "../../hooks/useOutsideClose";
 
 function NavAirbnbSetup() {
   const [isAgreeSetup, setIsAgreeSetup] = useState(false);
   const setOpenModel = useOpenModalStore((state) => state.setOpenModel);
+
+  const baseURL = useBaseURL((state) => state.baseURL);
 
   const agreeSetupBoxRef = useRef(null);
   useOutsideClose({
@@ -19,7 +21,7 @@ function NavAirbnbSetup() {
   });
 
   const handleAirbnbSetup = async () => {
-    await fetch(`/user/isLogin`)
+    await fetch(`${baseURL}/user/isLogin`)
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {
@@ -39,7 +41,7 @@ function NavAirbnbSetup() {
       .catch((err) => console.log(err.message));
   };
   const handleRole = async () => {
-    await fetch(`/user/hostRole`)
+    await fetch(`${baseURL}/user/hostRole`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {

@@ -3,7 +3,7 @@ import OtpInput from "react-otp-input";
 import { CgSpinner } from "react-icons/cg";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Validity from "../Validity";
-import { useLoginStore } from "../../../store/credentialStore";
+import { useBaseURL, useLoginStore } from "../../../store/credentialStore";
 import { toast, ToastContainer } from "react-toastify";
 
 function VerifyEmail() {
@@ -11,6 +11,7 @@ function VerifyEmail() {
   const params = useParams();
   const [isSpinning, setIsSpinning] = useState(false);
   const [isCorrect, setIsCorrect] = useState(true);
+  const baseURL = useBaseURL((state) => state.baseURL);
   const [search] = useSearchParams();
   const setIsLogin = useLoginStore((state) => state.setIsLogin);
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function VerifyEmail() {
       return;
     }
 
-    await fetch(`/user/verify_email`, {
+    await fetch(`${baseURL}/user/verify_email`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

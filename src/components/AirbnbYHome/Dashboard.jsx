@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../Navbar";
 import {
+  useBaseURL,
   useHostDataStore,
   useNavMiddleStore,
   useRefereshRoomStore,
@@ -57,8 +58,10 @@ function Dashboard() {
   });
   const setReloadRooms = useRefereshRoomStore((state) => state.setReloadRooms);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   const onSubmit = async (data) => {
-    await fetch(`/hotel/host`, {
+    await fetch(`${baseURL}/hotel/host`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

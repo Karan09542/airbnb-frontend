@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Link } from "react-router-dom";
 import useThrottle from "../../hooks/useThrottle";
+import { useBaseURL, useUserStore } from "../../../store/credentialStore";
 import FavoriteButton from "../favorites/FavoriteButton";
 
 function HotelCard({ className }) {
@@ -68,10 +69,12 @@ function HotelCard({ className }) {
     );
   };
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
     // price[lte]=5000
     setMoreLoading(true);
-    fetch(`/hotel?limit=18&skip=${skip}`)
+    fetch(`${baseURL}/hotel?limit=18&skip=${skip}`)
       .then((res) => res.json())
       .then((data) => {
         const initialSlideStates = data.hotels.reduce((acc, hotel) => {

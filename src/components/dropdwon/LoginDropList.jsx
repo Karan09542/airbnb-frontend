@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useLoginStore, useUserStore } from "../../../store/credentialStore";
+import {
+  useBaseURL,
+  useLoginStore,
+  useUserStore,
+} from "../../../store/credentialStore";
 import { Link } from "react-router-dom";
 
 function LoginDropList() {
@@ -7,8 +11,10 @@ function LoginDropList() {
   const [hasProperty, setHasProperty] = useState(false);
   const setUser = useUserStore((state) => state.setUser);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   function handleLogout() {
-    fetch(`/user/logout`)
+    fetch(`${baseURL}/user/logout`)
       .then((res) => res.json())
       .then(() => {
         setIsLogin(false);
@@ -16,7 +22,7 @@ function LoginDropList() {
       });
   }
   useEffect(() => {
-    fetch(`/hotel/dashboard`)
+    fetch(`${baseURL}/hotel/dashboard`)
       .then((res) => {
         if (res.ok) {
           setHasProperty(true);

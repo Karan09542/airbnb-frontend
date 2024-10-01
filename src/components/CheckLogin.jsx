@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import {
+  useBaseURL,
   useLoginStore,
   useShouldFetchUserStore,
   useUserStore,
@@ -15,6 +16,8 @@ function CheckLogin({ children }) {
   const setShouldFetchUser = useShouldFetchUserStore(
     (state) => state.setShouldFetchUser
   );
+
+  const baseURL = useBaseURL((state) => state.baseURL);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -42,7 +45,7 @@ function CheckLogin({ children }) {
     if (shouldFetchUser) {
       const fetchUserData = async () => {
         try {
-          const res = await fetch(`/user/isLogin`); // Assuming this is your endpoint
+          const res = await fetch(`${baseURL}/user/isLogin`); // Assuming this is your endpoint
           const data = await res.json();
           setUser(data.user);
         } catch (error) {

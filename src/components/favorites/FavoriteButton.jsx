@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoHeartOutline } from "react-icons/io5";
 import { IoHeartSharp } from "react-icons/io5";
 import {
+  useBaseURL,
   useOpenModalStore,
   useShouldFetchUserStore,
   useUserStore,
@@ -16,6 +17,8 @@ function FavoriteButton({ hotelId }) {
   );
   const setOpenModel = useOpenModalStore((state) => state.setOpenModel);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
     setFavorites(user?.favorites || []);
   }, [user?.favorites]);
@@ -27,7 +30,7 @@ function FavoriteButton({ hotelId }) {
     }
     try {
       const response = await fetch(
-        `/hotel/setFavorite/${hotelId}?setFlag=${isAdding}`
+        `${baseURL}/hotel/setFavorite/${hotelId}?setFlag=${isAdding}`
       );
       const data = await response.json();
 

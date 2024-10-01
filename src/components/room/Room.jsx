@@ -19,6 +19,7 @@ import { FiShare } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar";
 import {
+  useBaseURL,
   useFormDataStore,
   useNavMiddleStore,
   useOpenModalStore,
@@ -33,8 +34,10 @@ function Room() {
   const [hotel, setHotel] = useState({});
   const [isFatching, setIsFatching] = useState(true);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
-    fetch(`/hotel/rooms/${params.hotelId}`)
+    fetch(`${baseURL}/hotel/rooms/${params.hotelId}`)
       .then((res) => res.json())
       .then((data) => {
         setHotel(data?.hotel);
@@ -140,7 +143,7 @@ function Room() {
 
     setErrors(tempErrors);
     if (verifyAndReserveFlag && Object.keys(tempErrors).length === 0) {
-      await fetch(`/book`, {
+      await fetch(`${baseURL}/book`, {
         method: "POST",
         credentials: "include",
         headers: {

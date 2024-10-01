@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  useBaseURL,
   useLoginStore,
   useNavMiddleStore,
   useOpenModalStore,
@@ -20,8 +21,10 @@ function Trips() {
   const [loading, setLoading] = useState(true);
   const [isCancelled, setIsCancelled] = useState(false);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
-    fetch(`/book/trips`)
+    fetch(`${baseURL}/book/trips`)
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {
@@ -55,7 +58,7 @@ function Trips() {
   }, []);
 
   function handleCancelBooking(bookingId) {
-    fetch(`/book/cancelBooking`, {
+    fetch(`${baseURL}/book/cancelBooking`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +78,7 @@ function Trips() {
   }
 
   function deleteCancledBooking(bookingId) {
-    fetch(`/book/deleteCancledBooking`, {
+    fetch(`${baseURL}/book/deleteCancledBooking`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

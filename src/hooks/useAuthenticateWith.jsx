@@ -1,7 +1,10 @@
 import { toast } from "react-toastify";
+import { useBaseURL } from "../../store/credentialStore";
 
 export const useSignUp = (userData, setOpenModel, setIsLogin) => {
-  fetch(`/user/signup`, {
+  const baseURL = useBaseURL((state) => state.baseURL);
+
+  fetch(`${baseURL}/user/signup`, {
     method: "POST",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -23,7 +26,9 @@ export const useSignUp = (userData, setOpenModel, setIsLogin) => {
 };
 
 export const useLogin = (userData, setOpenModel, setIsLogin) => {
-  const response = fetch(`/user/login_signin`, {
+  const baseURL = useBaseURL((state) => state.baseURL);
+
+  const response = fetch(`${baseURL}/user/login_signin`, {
     method: "POST",
     headers: {
       "Content-type": "application/json; charset=UTF-8",

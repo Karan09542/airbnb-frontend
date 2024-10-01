@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  useBaseURL,
   useLoginStore,
   useNavMiddleStore,
   useOpenModalStore,
@@ -18,8 +19,10 @@ function MyProperties() {
   const [showDetail, setShowDetails] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   useEffect(() => {
-    fetch(`/hotel/host/rooms`)
+    fetch(`${baseURL}/hotel/host/rooms`)
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {

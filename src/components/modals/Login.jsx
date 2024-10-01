@@ -14,6 +14,7 @@ import Validity from "../Validity";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  useBaseURL,
   useFormDataStore,
   useLoginStore,
   useOpenModalStore,
@@ -44,6 +45,8 @@ function Login() {
   const setIsLogin = useLoginStore((state) => state.setIsLogin);
   const [isSpinning, setIsSpinning] = useState(false);
 
+  const baseURL = useBaseURL((state) => state.baseURL);
+
   async function verifyAndContinue(AgreeAndContinueFlag = false) {
     let tempErrors = {};
 
@@ -51,7 +54,7 @@ function Login() {
       tempErrors.email = "Email is required";
     else if (isForgotPassword && AgreeAndContinueFlag) {
       setIsSpinning(true);
-      await fetch(`/user/forgot_password`, {
+      await fetch(`${baseURL}/user/forgot_password`, {
         method: "POST",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -87,7 +90,7 @@ function Login() {
       // Proceed with further processing, such as form submission
       // console.log("Form is valid, proceeding...");
       setIsSpinning(true);
-      const response = await fetch(`/user/login_signin`, {
+      const response = await fetch(`${baseURL}/user/login_signin`, {
         method: "POST",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
