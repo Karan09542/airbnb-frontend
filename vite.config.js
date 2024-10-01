@@ -6,17 +6,11 @@ import svgr from "vite-plugin-svgr"
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
-    // proxy: {
-    //   "/user": "http://localhost:8000",
-    //   "/hotel": "http://localhost:8000",
-    //   "/content": "http://localhost:8000",
-    //   "/book": "http://localhost:8000",
-    // }
     proxy: {
-      "/user": "https://airbnb-backend-mu.vercel.app",
-      "/hotel": "https://airbnb-backend-mu.vercel.app",
-      "/content": "https://airbnb-backend-mu.vercel.app",
-      "/book": "https://airbnb-backend-mu.vercel.app",
+      "/user": import.meta.env.VITE_BASE_URL || "http://localhost:8000",
+      "/hotel": import.meta.env.VITE_BASE_URL || "http://localhost:8000",
+      "/content": import.meta.env.VITE_BASE_URL || "http://localhost:8000",
+      "/book": import.meta.env.VITE_BASE_URL || "http://localhost:8000",
     }
   }
 })
