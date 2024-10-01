@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Link } from "react-router-dom";
 import useThrottle from "../../hooks/useThrottle";
-import { useBaseURL, useUserStore } from "../../../store/credentialStore";
+import { useBaseURL } from "../../../store/credentialStore";
 import FavoriteButton from "../favorites/FavoriteButton";
 
 function HotelCard({ className }) {

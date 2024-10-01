@@ -22,7 +22,7 @@ function CheckLogin({ children }) {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const res = await fetch(`/user/isLogin`);
+        const res = await fetch(`${baseURL}/user/isLogin`);
         const data = await res.json();
 
         if (data.status === 401 || data?.message === "NOT_LOGGED_IN") {
