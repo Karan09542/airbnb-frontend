@@ -12,7 +12,7 @@ import MyProperties from "./components/AirbnbYHome/MyProperties.jsx";
 import Trips from "./components/trips/Trips.jsx";
 import ManageReservation from "./components/reservation/ManageReservation.jsx";
 import Favorite from "./components/favorites/Favorite.jsx";
-import SearchHotel from "./components/searchHotel/searchHotel.jsx";
+import SearchHotel from "./components/searchHotel/SearchHotel.jsx";
 import RangeSlider from "./components/RangeSilder/RangeSlider.jsx";
 import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
 import VerifyEmail from "./components/VerifyEmail/VerifyEmail.jsx";
