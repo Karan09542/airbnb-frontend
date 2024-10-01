@@ -13,10 +13,10 @@ export default defineConfig({
     //   "/book": "http://localhost:8000",
     // }
     proxy: {
-      "/user": "https://airbnb-backend-nine.vercel.app/",
-      "/hotel": "https://airbnb-backend-nine.vercel.app/",
-      "/content": "https://airbnb-backend-nine.vercel.app/",
-      "/book": "https://airbnb-backend-nine.vercel.app/",
+      "/user": "https://airbnb-backend-nine.vercel.app",
+      "/hotel": "https://airbnb-backend-nine.vercel.app",
+      "/content": "https://airbnb-backend-nine.vercel.app",
+      "/book": "https://airbnb-backend-nine.vercel.app",
     }
   }
 })
