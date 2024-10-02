@@ -44,6 +44,7 @@ function NavAirbnbSetup() {
   };
   const handleRole = async () => {
     await fetch(`${baseURL}/user/hostRole`, {
+      method: "PATCH",
       credentials: "include",
     })
       .then((res) => res.json())
