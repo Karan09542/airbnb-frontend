@@ -13,8 +13,8 @@ function LoginDropList() {
 
   const baseURL = useBaseURL((state) => state.baseURL);
 
-  function handleLogout() {
-    fetch(`${baseURL}/user/logout`, {
+  async function handleLogout() {
+    await fetch(`${baseURL}/user/logout`, {
       credentials: "include",
     })
       .then((res) => res.json())
