@@ -25,7 +25,7 @@ export const useLoginStore = create((set)=> ({
 }))
 
 export const useUserStore = create((set)=>({
-  user:[],
+  user:{},
   setUser: (user)=> set({user: user})
 }))
 
