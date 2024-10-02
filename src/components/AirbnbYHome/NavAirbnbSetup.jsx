@@ -43,7 +43,9 @@ function NavAirbnbSetup() {
       .catch((err) => console.log(err.message));
   };
   const handleRole = async () => {
-    await fetch(`${baseURL}/user/hostRole`)
+    await fetch(`${baseURL}/user/hostRole`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
