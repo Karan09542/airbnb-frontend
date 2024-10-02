@@ -23,7 +23,7 @@ function LoginDropList() {
         if (data.status === "success") {
           setIsLogin(false);
           setUser({});
-          toast.success("Logout successfully");
+          toast.success("Logout successfull");
         } else {
           toast.error("Logout unsuccessful");
         }
