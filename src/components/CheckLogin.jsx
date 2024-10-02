@@ -23,6 +23,7 @@ function CheckLogin({ children }) {
     const checkLoginStatus = async () => {
       try {
         const res = await fetch(`${baseURL}/user/isLogin`, {
+          method: "POST",
           credentials: "include",
         });
         const data = await res.json();
@@ -48,6 +49,7 @@ function CheckLogin({ children }) {
       const fetchUserData = async () => {
         try {
           const res = await fetch(`${baseURL}/user/isLogin`, {
+            method: "POST",
             credentials: "include",
           }); // Assuming this is your endpoint
           const data = await res.json();
