@@ -16,6 +16,7 @@ function LoginDropList() {
 
   async function handleLogout() {
     await fetch(`${baseURL}/user/logout`, {
+      method: "POST",
       credentials: "include",
     })
       .then((res) => res.json())
