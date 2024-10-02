@@ -22,7 +22,9 @@ function CheckLogin({ children }) {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const res = await fetch(`${baseURL}/user/isLogin`);
+        const res = await fetch(`${baseURL}/user/isLogin`, {
+          credentials: "include",
+        });
         const data = await res.json();
 
         if (data.status === 401 || data?.message === "NOT_LOGGED_IN") {
@@ -45,7 +47,9 @@ function CheckLogin({ children }) {
     if (shouldFetchUser) {
       const fetchUserData = async () => {
         try {
-          const res = await fetch(`${baseURL}/user/isLogin`); // Assuming this is your endpoint
+          const res = await fetch(`${baseURL}/user/isLogin`, {
+            credentials: "include",
+          }); // Assuming this is your endpoint
           const data = await res.json();
           setUser(data.user);
         } catch (error) {
