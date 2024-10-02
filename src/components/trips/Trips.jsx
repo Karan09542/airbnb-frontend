@@ -24,7 +24,9 @@ function Trips() {
   const baseURL = useBaseURL((state) => state.baseURL);
 
   useEffect(() => {
-    fetch(`${baseURL}/book/trips`)
+    fetch(`${baseURL}/book/trips`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {
@@ -60,6 +62,7 @@ function Trips() {
   function handleCancelBooking(bookingId) {
     fetch(`${baseURL}/book/cancelBooking`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -80,6 +83,7 @@ function Trips() {
   function deleteCancledBooking(bookingId) {
     fetch(`${baseURL}/book/deleteCancledBooking`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

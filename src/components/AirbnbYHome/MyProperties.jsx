@@ -22,7 +22,9 @@ function MyProperties() {
   const baseURL = useBaseURL((state) => state.baseURL);
 
   useEffect(() => {
-    fetch(`${baseURL}/hotel/host/rooms`)
+    fetch(`${baseURL}/hotel/host/rooms`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {

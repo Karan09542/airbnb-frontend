@@ -56,6 +56,7 @@ function Login() {
       setIsSpinning(true);
       await fetch(`${baseURL}/user/forgot_password`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
@@ -92,6 +93,7 @@ function Login() {
       setIsSpinning(true);
       const response = await fetch(`${baseURL}/user/login_signin`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },

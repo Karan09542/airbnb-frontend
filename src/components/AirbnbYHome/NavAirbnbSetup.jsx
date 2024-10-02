@@ -21,7 +21,9 @@ function NavAirbnbSetup() {
   });
 
   const handleAirbnbSetup = async () => {
-    await fetch(`${baseURL}/user/isLogin`)
+    await fetch(`${baseURL}/user/isLogin`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {

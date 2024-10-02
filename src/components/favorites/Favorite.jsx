@@ -23,7 +23,9 @@ function Favorite() {
   const baseURL = useBaseURL((state) => state.baseURL);
 
   useEffect(() => {
-    fetch(`${baseURL}/hotel/getFavorite`)
+    fetch(`${baseURL}/hotel/getFavorite`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {

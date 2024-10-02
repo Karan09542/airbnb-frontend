@@ -26,6 +26,7 @@ function VerifyEmail() {
 
     await fetch(`${baseURL}/user/verify_email`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },

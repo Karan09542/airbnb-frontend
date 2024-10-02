@@ -35,6 +35,7 @@ function ResetPassword() {
     setIsSpinning(true);
     await fetch(`${baseURL}/user/change_password`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },

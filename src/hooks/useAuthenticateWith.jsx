@@ -6,6 +6,7 @@ export const useSignUp = (userData, setOpenModel, setIsLogin) => {
 
   fetch(`${baseURL}/user/signup`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
@@ -30,6 +31,7 @@ export const useLogin = (userData, setOpenModel, setIsLogin) => {
 
   const response = fetch(`${baseURL}/user/login_signin`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },

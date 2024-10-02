@@ -30,7 +30,8 @@ function FavoriteButton({ hotelId }) {
     }
     try {
       const response = await fetch(
-        `${baseURL}/hotel/setFavorite/${hotelId}?setFlag=${isAdding}`
+        `${baseURL}/hotel/setFavorite/${hotelId}?setFlag=${isAdding}`,
+        { credentials: "include" }
       );
       const data = await response.json();
 

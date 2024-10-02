@@ -18,7 +18,9 @@ function HostRoomCards({ setValue }) {
   const baseURL = useBaseURL((state) => state.baseURL);
 
   useEffect(() => {
-    fetch(`${baseURL}/hotel/host/rooms`)
+    fetch(`${baseURL}/hotel/host/rooms`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         setRooms(data.rooms);
@@ -29,6 +31,7 @@ function HostRoomCards({ setValue }) {
   const handleDeleteRoom = async (room) => {
     await fetch(`${baseURL}/hotel/host/room/delete`, {
       method: "POST",
+      credentials: "include",
       headers: { "Content-type": "application/json; charset=UTF-8" },
       body: JSON.stringify({ roomId: room._id }),
     })

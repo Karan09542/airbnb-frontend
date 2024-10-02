@@ -17,6 +17,7 @@ function ManageReservation() {
   function handleReservationStatus(bookingId, reservationStatus) {
     fetch(`${baseURL}/book/updateReservationStatus`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -43,7 +44,8 @@ function ManageReservation() {
   }, []);
   useEffect(() => {
     fetch(
-      `${baseURL}/book/BookingUserDetails?status=${selectStatus || "pending"}`
+      `${baseURL}/book/BookingUserDetails?status=${selectStatus || "pending"}`,
+      { credentials: "include" }
     )
       .then((res) => res.json())
       .then((data) => setBookings(data.bookings))

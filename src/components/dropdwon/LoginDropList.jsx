@@ -14,7 +14,9 @@ function LoginDropList() {
   const baseURL = useBaseURL((state) => state.baseURL);
 
   function handleLogout() {
-    fetch(`${baseURL}/user/logout`)
+    fetch(`${baseURL}/user/logout`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then(() => {
         setIsLogin(false);
@@ -22,7 +24,9 @@ function LoginDropList() {
       });
   }
   useEffect(() => {
-    fetch(`${baseURL}/hotel/dashboard`)
+    fetch(`${baseURL}/hotel/dashboard`, {
+      credentials: "include",
+    })
       .then((res) => {
         if (res.ok) {
           setHasProperty(true);

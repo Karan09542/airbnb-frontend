@@ -37,7 +37,9 @@ function Room() {
   const baseURL = useBaseURL((state) => state.baseURL);
 
   useEffect(() => {
-    fetch(`${baseURL}/hotel/rooms/${params.hotelId}`)
+    fetch(`${baseURL}/hotel/rooms/${params.hotelId}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         setHotel(data?.hotel);

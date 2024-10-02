@@ -11,7 +11,9 @@ function AirbnbYHome() {
   const [loading, setLoading] = useState(true);
   const isLogin = useLoginStore((state) => state.isLogin);
   useEffect(() => {
-    fetch(`${baseURL}/hotel/dashboard`)
+    fetch(`${baseURL}/hotel/dashboard`, {
+      credentials: "include",
+    })
       .then((res) => {
         if (res.ok) {
           setShowDashboard(true);

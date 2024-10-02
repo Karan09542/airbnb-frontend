@@ -87,7 +87,10 @@ function SearchHotelCard({ className }) {
     // price[lte]=5000
     setMoreLoading(true);
     fetch(
-      `${baseURL}/hotel?limit=18&skip=${skip}&searchText=${params.searchText}&price[lte]=${priceRange[1]}&price[gte]=${priceRange[0]}&sort=${priority}`
+      `${baseURL}/hotel?limit=18&skip=${skip}&searchText=${params.searchText}&price[lte]=${priceRange[1]}&price[gte]=${priceRange[0]}&sort=${priority}`,
+      {
+        credentials: "include",
+      }
     )
       .then((res) => res.json())
       .then((data) => {

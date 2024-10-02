@@ -71,6 +71,7 @@ function Sign_toEmail() {
       console.log("Form is valid, proceeding...");
       await fetch(`${baseURL}/user/signup`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
