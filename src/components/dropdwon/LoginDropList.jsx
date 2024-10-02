@@ -5,6 +5,7 @@ import {
   useUserStore,
 } from "../../../store/credentialStore";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function LoginDropList() {
   const setIsLogin = useLoginStore((state) => state.setIsLogin);
@@ -18,9 +19,14 @@ function LoginDropList() {
       credentials: "include",
     })
       .then((res) => res.json())
-      .then(() => {
-        setIsLogin(false);
-        setUser({});
+      .then((data) => {
+        if (data.status === "success") {
+          setIsLogin(false);
+          setUser({});
+          toast.success("Logout successfully");
+        } else {
+          toast.error("Logout unsuccessful");
+        }
       });
   }
   useEffect(() => {
