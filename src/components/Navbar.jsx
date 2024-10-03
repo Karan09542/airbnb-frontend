@@ -33,7 +33,7 @@ function Navbar({ className }) {
 
         <div className="flex items-center">
           {isNavMiddle && (
-            <span className="font-bold hover:bg-[var(--general-hover)] relative z-10 back cursor-pointer">
+            <span className="font-bold text-nowra hover:bg-[var(--general-hover)] relative z-10 back cursor-pointer">
               <Link to="/host/homes">Airbnb your home</Link>
             </span>
           )}

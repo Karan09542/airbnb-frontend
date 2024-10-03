@@ -93,7 +93,7 @@ function Search({ className }) {
       {/* small search */}
       {!isBig && (
         <div
-          className={` relative border cursor-pointer justify-between rounded-full flex mx-auto [&>*:not(div.empty)]:px-5 max-[850px]:[&>*:not(div.empty)]:px-4 max-[816px]:[&>*:not(div.empty)]:px-3 [&>*:not(div:empty)]:py-3 text-[0.9em] [&>div>*:nth-child(1)]:font-semibold [&>div>*:nth-child(1)]:text-[#404040] bg-white ${`[&_div.empty>p]:w-px [&_div.empty>p]:bg-gray-200 [&_div.empty]:flex [&_div.empty]:items-center [&_div.empty>p]:h-[70%]`}`}
+          className={`max-[780px]:[&>*:not(div.empty)]:px-2 relative border cursor-pointer justify-between rounded-full flex mx-auto [&>*:not(div.empty)]:px-5 max-[850px]:[&>*:not(div.empty)]:px-4 max-[816px]:[&>*:not(div.empty)]:px-3 [&>*:not(div:empty)]:py-3 text-[0.9em] [&>div>*:nth-child(1)]:font-semibold [&>div>*:nth-child(1)]:text-[#404040] bg-white ${`[&_div.empty>p]:w-px [&_div.empty>p]:bg-gray-200 [&_div.empty]:flex [&_div.empty]:items-center [&_div.empty>p]:h-[70%]`}`}
           onClick={() => setHelper(true)}
         >
           <div
@@ -103,7 +103,9 @@ function Search({ className }) {
               setClick(true);
             }}
           >
-            <p>{params.searchText || "AnyWhere"}</p>
+            <p className="!px-0 text-ellipsis text-nowrap">
+              {params.searchText || "AnyWhere"}
+            </p>
           </div>
           <div className="empty">
             <p></p>
@@ -115,7 +117,7 @@ function Search({ className }) {
               setClick(true);
             }}
           >
-            <p>Any week</p>
+            <p className="text-nowrap text-ellipsis">Any week</p>
           </div>
           <div className="empty">
             <p></p>
@@ -127,7 +129,7 @@ function Search({ className }) {
               setClick(true);
             }}
           >
-            <p>Add guests</p>
+            <p className="text-nowrap text-ellipsis">Add guests</p>
           </div>
           <div
             className={` !p-2 scale-75 bg-rose-500 text-white rounded-full aspect-square flex items-center justify-center`}
@@ -140,11 +142,11 @@ function Search({ className }) {
 
       {isBig && (
         <div
-          className={` [&_div.empty]:h-full [&_div.empty]:flex [&_div.empty]:items-center [&_div.empty]:w-px [&_div.empty>p]:h-[70%] [&_div.empty>p]:w-px [&_div.empty>p]:bg-gray-200
+          className={`[&_div.empty]:h-full [&_div.empty]:flex [&_div.empty]:items-center [&_div.empty]:w-px [&_div.empty>p]:h-[70%] [&_div.empty>p]:w-px [&_div.empty>p]:bg-gray-200
         ${click ? "bg-gray-200" : "dark-shadow"}
       border ${
         className ? className : ""
-      } cursor-pointer justify-between rounded-full flex mx-auto [&>*:not(div.empty)]:px-5 [&>*:not(div:empty)]:py-3 border-r text-[0.9em] [&>div>*:nth-child(1)]:font-semibold [&>div>*:nth-child(1)]:text-[#404040]
+      } cursor-pointer justify-between rounded-full flex mx-auto [&>*:not(div.empty)]:px-5 [&>*:not(div:empty)]:py-2 h-[65px] border-r text-[0.9em] [&>div>*:nth-child(1)]:font-semibold [&>div>*:nth-child(1)]:text-[#404040]
       `}
           onClick={() => {
             setClick(true);
@@ -251,7 +253,7 @@ function Search({ className }) {
                   navigate("/");
                 }
               }}
-              className={`transition-width duration-200 flex items-center justify-center rounded-full last:font-semibold bg-rose-500 ease-in text-white text-[1.1em] px-2 h-[50px] ${
+              className={`transition-width duration-200 flex items-center justify-center rounded-full last:font-semibold bg-rose-500 ease-in text-white text-[1.1em] px-2 h-[50px] scale-95 ${
                 !sizeOfSearch && "aspect-square"
               }  ${sizeOfSearch && "pr-4"}`}
               style={{ filter: "contrast(108%)" }}
