@@ -45,7 +45,7 @@ function ManageReservation() {
   useEffect(() => {
     fetch(
       `${baseURL}/book/BookingUserDetails?status=${selectStatus || "pending"}`,
-      { credentials: "include" }
+      { method: "POST", credentials: "include" }
     )
       .then((res) => res.json())
       .then((data) => setBookings(data.bookings))

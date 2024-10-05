@@ -19,6 +19,7 @@ function HostRoomCards({ setValue }) {
 
   useEffect(() => {
     fetch(`${baseURL}/hotel/host/rooms`, {
+      method: "POST",
       credentials: "include",
     })
       .then((res) => res.json())
