@@ -24,6 +24,7 @@ function Favorite() {
 
   useEffect(() => {
     fetch(`${baseURL}/hotel/getFavorite`, {
+      method: "POST",
       credentials: "include",
     })
       .then((res) => res.json())

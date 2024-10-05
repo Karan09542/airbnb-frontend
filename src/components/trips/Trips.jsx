@@ -25,6 +25,7 @@ function Trips() {
 
   useEffect(() => {
     fetch(`${baseURL}/book/trips`, {
+      method: "POST",
       credentials: "include",
     })
       .then((res) => res.json())

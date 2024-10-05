@@ -12,6 +12,7 @@ function AirbnbYHome() {
   const isLogin = useLoginStore((state) => state.isLogin);
   useEffect(() => {
     fetch(`${baseURL}/hotel/dashboard`, {
+      method: "POST",
       credentials: "include",
     })
       .then((res) => {

@@ -23,7 +23,10 @@ function Reservation() {
   const baseURL = useBaseURL((state) => state.baseURL);
 
   useEffect(() => {
-    fetch(`${baseURL}/book/reservation`, { credentials: "include" })
+    fetch(`${baseURL}/book/reservation`, {
+      method: "POST",
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         switch (data.status) {
