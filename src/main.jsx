@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/Not_Found",
+    path: "*",
     element: <ErrorPage />,
   },
   {
