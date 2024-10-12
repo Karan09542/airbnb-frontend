@@ -224,7 +224,7 @@ function Room() {
           </div>
           <div className="max-w-[1080px] mx-auto mt-24">
             <div className="grid grid-cols-2 gap-2 mx-32 mt-14 [&>img:nth-child(3n-2)]:col-[1/3] pb-10 [&>img:not(:nth-child(3n-2))]:h-96">
-              {hotel?.image_url?.slice(0, 5).map((src) => (
+              {hotel?.image_url?.map((src) => (
                 <img
                   key={src}
                   src={src}
@@ -277,7 +277,7 @@ function Room() {
                 {/* location city country */}
                 <div className="!pb-7">
                   <p className="text-2xl font-semibold">
-                    {hotel?.city}, {hotel?.state}, {hotel?.country}
+                    {hotel?.city}, {hotel?.state}, {hotel?.country}{" "}
                   </p>
                   <p>similar things as shown in the images</p>
                   <p className="flex items-center gap-1 text-stone-950">
