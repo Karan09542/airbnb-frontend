@@ -19,6 +19,7 @@ import { FiShare } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useFormDataStore,
   useNavMiddleStore,
@@ -126,6 +127,8 @@ function Room() {
     }));
   }, [paymentStatus]);
 
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
+
   function handleBookingData(e) {
     setBookingData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -150,6 +153,7 @@ function Room() {
         credentials: "include",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(bookingData),
       })
@@ -277,7 +281,7 @@ function Room() {
                 {/* location city country */}
                 <div className="!pb-7">
                   <p className="text-2xl font-semibold">
-                    {hotel?.city}, {hotel?.state}, {hotel?.country}{" "}
+                    {hotel?.city}, {hotel?.state}, {hotel?.country}
                   </p>
                   <p>similar things as shown in the images</p>
                   <p className="flex items-center gap-1 text-stone-950">

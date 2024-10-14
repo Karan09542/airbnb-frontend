@@ -14,6 +14,7 @@ import Validity from "../Validity";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useFormDataStore,
   useLoginStore,
@@ -46,6 +47,7 @@ function Login() {
   const [isSpinning, setIsSpinning] = useState(false);
 
   const baseURL = useBaseURL((state) => state.baseURL);
+  const setAccessToken = useAccessTokenStore((state) => state.setAccessToken);
 
   async function verifyAndContinue(AgreeAndContinueFlag = false) {
     let tempErrors = {};
@@ -105,6 +107,7 @@ function Login() {
       if (response.ok) {
         toast.success("Login successfull");
         setIsLogin(true);
+        setAccessToken(data.access_token);
       } else {
         toast.error(data.message);
         setIsLogin(false);

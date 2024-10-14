@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoHeartOutline } from "react-icons/io5";
 import { IoHeartSharp } from "react-icons/io5";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useOpenModalStore,
   useShouldFetchUserStore,
@@ -22,6 +23,9 @@ function FavoriteButton({ hotelId }) {
   useEffect(() => {
     setFavorites(user?.favorites || []);
   }, [user?.favorites]);
+
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
+
   const handleFavroite = async (hotelId, isAdding) => {
     if (!user?.active) {
       toast.error("Please login to add favorites");
@@ -31,7 +35,14 @@ function FavoriteButton({ hotelId }) {
     try {
       const response = await fetch(
         `${baseURL}/hotel/setFavorite/${hotelId}?setFlag=${isAdding}`,
-        { method: "POST", credentials: "include" }
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          credentials: "include",
+        }
       );
       const data = await response.json();
 

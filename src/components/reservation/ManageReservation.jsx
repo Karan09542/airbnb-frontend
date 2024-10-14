@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import AuthenticateModel from "../modals/AuthenticateModel";
 import NavBar from "../Navbar";
-import { useBaseURL, useNavMiddleStore } from "../../../store/credentialStore";
+import {
+  useAccessTokenStore,
+  useBaseURL,
+  useNavMiddleStore,
+} from "../../../store/credentialStore";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -13,6 +17,7 @@ function ManageReservation() {
   const setIsNavMiddle = useNavMiddleStore((state) => state.setIsNavMiddle);
 
   const baseURL = useBaseURL((state) => state.baseURL);
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
 
   function handleReservationStatus(bookingId, reservationStatus) {
     fetch(`${baseURL}/book/updateReservationStatus`, {
@@ -20,6 +25,7 @@ function ManageReservation() {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({ bookingId, reservationStatus }),
     })
@@ -45,7 +51,14 @@ function ManageReservation() {
   useEffect(() => {
     fetch(
       `${baseURL}/book/BookingUserDetails?status=${selectStatus || "pending"}`,
-      { method: "POST", credentials: "include" }
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => setBookings(data.bookings))

@@ -3,7 +3,11 @@ import { FaAirbnb } from "react-icons/fa";
 import HomeSetupSVG from "../../assets/homeSetup.svg?react";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import { useBaseURL, useOpenModalStore } from "../../../store/credentialStore";
+import {
+  useAccessTokenStore,
+  useBaseURL,
+  useOpenModalStore,
+} from "../../../store/credentialStore";
 import { toast } from "react-toastify";
 import useOutsideClose from "../../hooks/useOutsideClose";
 
@@ -19,10 +23,15 @@ function NavAirbnbSetup() {
     reference: agreeSetupBoxRef,
     arg: false,
   });
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
 
   const handleAirbnbSetup = async () => {
-    await fetch(`${baseURL}/user/isLogin`, {
+    await fetch(`${baseURL}/user/`, {
       method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
       credentials: "include",
     })
       .then((res) => res.json())
@@ -46,6 +55,10 @@ function NavAirbnbSetup() {
   const handleRole = async () => {
     await fetch(`${baseURL}/user/hostRole`, {
       method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
       credentials: "include",
     })
       .then((res) => res.json())

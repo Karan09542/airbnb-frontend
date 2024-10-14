@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../Navbar";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useHostDataStore,
   useNavMiddleStore,
@@ -59,6 +60,7 @@ function Dashboard() {
   const setReloadRooms = useRefereshRoomStore((state) => state.setReloadRooms);
 
   const baseURL = useBaseURL((state) => state.baseURL);
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
 
   const onSubmit = async (data) => {
     await fetch(`${baseURL}/hotel/host`, {
@@ -66,6 +68,7 @@ function Dashboard() {
       credentials: "include",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(data),
     })

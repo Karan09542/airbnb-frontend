@@ -3,16 +3,26 @@ import NavAirbnbSetup from "./NavAirbnbSetup";
 import AuthenticateModel from "../modals/AuthenticateModel";
 import Dashboard from "./Dashboard";
 import BarLoader from "react-spinners/BarLoader";
-import { useBaseURL, useLoginStore } from "../../../store/credentialStore";
+import {
+  useAccessTokenStore,
+  useBaseURL,
+  useLoginStore,
+} from "../../../store/credentialStore";
 
 function AirbnbYHome() {
   const baseURL = useBaseURL((state) => state.baseURL);
   const [showDashboard, setShowDashboard] = useState(false);
   const [loading, setLoading] = useState(true);
   const isLogin = useLoginStore((state) => state.isLogin);
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
+
   useEffect(() => {
     fetch(`${baseURL}/hotel/dashboard`, {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+
       credentials: "include",
     })
       .then((res) => {

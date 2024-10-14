@@ -40,7 +40,11 @@ function Hamburger() {
           className="rounded-full w-[32px] aspect-square"
         ></img>
       ) : (
-        <UserLogo style={{ fill: isLogin ? "#F43F5E" : "#676767" }} />
+        <UserLogo
+          style={{
+            fill: isLogin ? (user?.image ? "#F43F5E" : "#676767") : "#676767",
+          }}
+        />
       )}
       {show && (
         <Dropdown

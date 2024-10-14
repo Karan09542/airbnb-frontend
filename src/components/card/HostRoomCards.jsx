@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SyncLoader from "react-spinners/SyncLoader";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useHostDataStore,
   useRefereshRoomStore,
@@ -16,10 +17,15 @@ function HostRoomCards({ setValue }) {
   const setReloadRooms = useRefereshRoomStore((state) => state.setReloadRooms);
 
   const baseURL = useBaseURL((state) => state.baseURL);
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
 
   useEffect(() => {
     fetch(`${baseURL}/hotel/host/rooms`, {
       method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
       credentials: "include",
     })
       .then((res) => res.json())
@@ -32,8 +38,11 @@ function HostRoomCards({ setValue }) {
   const handleDeleteRoom = async (room) => {
     await fetch(`${baseURL}/hotel/host/room/delete`, {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-type": "application/json; charset=UTF-8",
+      },
       credentials: "include",
-      headers: { "Content-type": "application/json; charset=UTF-8" },
       body: JSON.stringify({ roomId: room._id }),
     })
       .then((res) => {
@@ -131,7 +140,6 @@ function HostRoomCards({ setValue }) {
                           onClick={() => {
                             setHostData(room);
                             setValue("hotelId", room._id);
-                            console.log(room);
                           }}
                           className="px-2.5 py-1.5 text-white bg-blue-500 rounded-lg transition-all active:scale-95"
                         >

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useLoginStore,
   useNavMiddleStore,
@@ -21,10 +22,15 @@ function Reservation() {
   const [loading, setLoading] = useState(true);
 
   const baseURL = useBaseURL((state) => state.baseURL);
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
 
   useEffect(() => {
     fetch(`${baseURL}/book/reservation`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
       credentials: "include",
     })
       .then((res) => res.json())

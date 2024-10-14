@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useLoginStore,
   useNavMiddleStore,
@@ -21,10 +22,14 @@ function Favorite() {
   const [loading, setLoading] = useState(true);
 
   const baseURL = useBaseURL((state) => state.baseURL);
-
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
   useEffect(() => {
     fetch(`${baseURL}/hotel/getFavorite`, {
       method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
       credentials: "include",
     })
       .then((res) => res.json())

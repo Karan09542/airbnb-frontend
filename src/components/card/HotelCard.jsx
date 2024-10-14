@@ -74,9 +74,7 @@ function HotelCard({ className }) {
   useEffect(() => {
     // price[lte]=5000
     setMoreLoading(true);
-    fetch(`${baseURL}/hotel?limit=18&skip=${skip}`, {
-      credentials: "include",
-    })
+    fetch(`${baseURL}/hotel?limit=18&skip=${skip}`)
       .then((res) => res.json())
       .then((data) => {
         const initialSlideStates = data.hotels.reduce((acc, hotel) => {

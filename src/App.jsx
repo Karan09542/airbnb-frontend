@@ -18,6 +18,7 @@ function App() {
   useEffect(() => {
     document.title = "हरिॐ अन्नपूर्णा";
   });
+
   useEffect(() => {
     if (openModel === null) {
       setFormData({

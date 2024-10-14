@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  useAccessTokenStore,
   useBaseURL,
   useLoginStore,
   useUserStore,
@@ -13,6 +14,8 @@ function LoginDropList() {
   const setUser = useUserStore((state) => state.setUser);
 
   const baseURL = useBaseURL((state) => state.baseURL);
+  const accessToken = useAccessTokenStore((state) => state.accessToken);
+  const setAccessToken = useAccessTokenStore((state) => state.setAccessToken);
 
   async function handleLogout() {
     await fetch(`${baseURL}/user/logout`, {
@@ -24,6 +27,7 @@ function LoginDropList() {
         if (data.status === "success") {
           setIsLogin(false);
           setUser({});
+          setAccessToken("");
           toast.success("Logout successfull");
         } else {
           toast.error("Logout unsuccessful");
@@ -33,6 +37,10 @@ function LoginDropList() {
   useEffect(() => {
     fetch(`${baseURL}/hotel/dashboard`, {
       method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
       credentials: "include",
     })
       .then((res) => {

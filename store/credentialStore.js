@@ -107,3 +107,8 @@ export const useOTP = create((set)=> ({
   otp: "",
   setOtp: (otp)=> set({otp: otp})
 }))
+
+export const useAccessTokenStore = create((set)=>({
+  accessToken: "",
+  setAccessToken: (accessToken)=> set({accessToken: accessToken}), 
+}))
